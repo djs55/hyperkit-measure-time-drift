@@ -26,3 +26,4 @@ gnuplot graph.gp
 open graph.png
 ```
 
+![sawtooth graph showing drift](https://djs55.github.io/hyperkit-measure-time-drift/screenshot.png)
