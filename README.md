@@ -27,3 +27,8 @@ open graph.png
 ```
 
 ![sawtooth graph showing drift](https://djs55.github.io/hyperkit-measure-time-drift/screenshot.png)
+
+Note there is no attempt to measure and subtract the round-trip time to the VM.
+The graphs therefore have an arbitrary offset added and should be used to understand
+the change in the drift over time, rather than the exact drift at any specific point
+in time.
