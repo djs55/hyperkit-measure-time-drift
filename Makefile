@@ -16,10 +16,16 @@ graph.png: graph.gp drift.0.postprocessed.dat
 drift.0.postprocessed.dat: drift.0.dat
 	cat drift.0.dat | ./postprocess.py > drift.0.postprocessed.dat
 
+.PHONY:binaries
 binaries: server cmd/client/client
 
 .PHONY: server
-	(cd cmd/server && docker build -t server .)
+server:
+	docker build -t server .
+
+.PHONY: cmd/client/client
+cmd/client/client:
+	(cd cmd/client && go build)
 
 .PHONY: clean
 clean:

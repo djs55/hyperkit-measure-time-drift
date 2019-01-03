@@ -8,6 +8,8 @@ import (
 	"os"
 	"syscall"
 	"time"
+
+	"github.com/dterei/gotsc"
 )
 
 func main() {
@@ -45,6 +47,7 @@ func handleRequest(conn net.Conn) {
 		if err != nil {
 			log.Fatal("Error marshalling time", err)
 		}
+		tsc := gotsc.BenchStart()
 		var timex syscall.Timex
 		state, err := syscall.Adjtimex(&timex)
 		if err != nil {
@@ -58,7 +61,7 @@ func handleRequest(conn net.Conn) {
 		frequency := timex.Freq
 		conn.Write(bs)
 		conn.Write([]byte(" "))
-		conn.Write([]byte(fmt.Sprintf("%d %d %d", int64(offset/time.Microsecond), frequency, state)))
+		conn.Write([]byte(fmt.Sprintf("%d %d %d %d", int64(offset/time.Microsecond), tsc, frequency, state)))
 		conn.Write([]byte("\n"))
 	}
 }
