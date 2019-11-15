@@ -18,7 +18,11 @@ drift.0.postprocessed.dat: drift.0.dat
 
 binaries: server cmd/client/client
 
+cmd/client/client:
+	cd cmd/client && go build
+
 .PHONY: server
+server:
 	(cd cmd/server && docker build -t server .)
 
 .PHONY: clean
